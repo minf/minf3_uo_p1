@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Schema name="BonDaten">
+	<Cube name="BonDaten">
+		<Table name="BONS"/>
+		
+		<Dimension name="ARTIKEL" foreignKey="ARTIKEL">
+			<Hierarchy hasAll="true" allMemberName="Alle Artikel" primaryKey="ARTNR">
+				<Table name="ARTIKEL"/>
+				<Level name="ARTIKELNAME" column="ARTNAME" uniqueMembers="true"/>
+			</Hierarchy>
+		</Dimension>
+		
+		<Dimension name="FILIALEN" foreignKey="FILIALE">
+			<Hierarchy hasAll="true" allMemberName="Alle Filialen" primaryKey="FILIALE">
+				<Table name="FILIALEN"/>
+				<Level name="FILALE" column="FILIALE" uniqueMembers="true"/>
+			</Hierarchy>
+		</Dimension>
+		
+		<Dimension name="KUNDEN" foreignKey="KUNDE">
+			<Hierarchy hasAll="true" allMemberName="Alle Kunden" primaryKey="KDNR">
+				<Table name="KUNDEN"/>
+				<Level name="NAME" column="NAME" uniqueMembers="true">
+					<Property name="Vorname" column="VORNAME"/>
+					<Property name="Strasse" column="SRASSE"/>
+					<Property name="PLZ" column="PLZ"/>
+					<Property name="Ort" column="ORT"/>
+				</Level>
+			</Hierarchy>
+		</Dimension>
+		
+		<Dimension name="VERKAEUFER" foreignKey="VERKAEUFER">
+			<Hierarchy hasAll="true" allMemberName="Alle Verkaeufer" primaryKey="NAME">
+				<Table name="VERKAEUFER"/>
+				<Level name="NAME" column="NAME" uniqueMembers="true"/>
+			</Hierarchy>
+		</Dimension>
+
+		<Measure name="Preis Total" column="PREIS" aggregator="sum" formatString="#.###"/>
+		<Measure name="Count Total" column="PREIS" aggregator="count" formatString="####"/>
+		<Measure name="AVG Total" column="PREIS" aggregator="avg" formatString="#.###"/>
+	</Cube>
+</Schema>
+
+
+
+
